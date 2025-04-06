@@ -6,24 +6,14 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+import { ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
+    Colors, DebugInstructions, Header, LearnMoreLinks, ReloadInstructions
 } from 'react-native/Libraries/NewAppScreen';
 
+import GroupedRadioInput from './components/inputs/GroupedRadioInput';
+
+import type {PropsWithChildren} from 'react';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -32,6 +22,12 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
+      <GroupedRadioInput
+        options={['Admin', 'Users']}
+        onChange={() => {}}
+        disabled={false}
+        value="Admin"
+      />
       <Text
         style={[
           styles.sectionTitle,
@@ -78,10 +74,9 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
-        style={backgroundStyle}>
+      <ScrollView style={backgroundStyle}>
         <View style={{paddingRight: safePadding}}>
-          <Header/>
+          <Header />
         </View>
         <View
           style={{
