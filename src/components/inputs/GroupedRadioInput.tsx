@@ -1,18 +1,20 @@
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import {Pressable, Text, View} from 'react-native';
+import {colors} from '../../theme/colors';
+import { UserRole } from '../../graphQL/Query/useUsers';
 
 type GroupedRadioInputProps = {
-  options: string[];
-  value: string;
-  onChange(selOption: string): void;
-  disabled: boolean;
+  options: UserRole[];
+  value: UserRole;
+  onChange(selOption: UserRole): void;
+  disabled?: boolean;
 };
 
 const GroupedRadioInput: React.FC<GroupedRadioInputProps> = ({
   options,
   value,
   onChange,
-  disabled,
+  disabled = false,
 }) => {
   return (
     <View
@@ -20,7 +22,7 @@ const GroupedRadioInput: React.FC<GroupedRadioInputProps> = ({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5,
+        gap: 20,
       }}>
       {options.map(option => {
         const isSelected = option === value;
@@ -35,17 +37,25 @@ const GroupedRadioInput: React.FC<GroupedRadioInputProps> = ({
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              gap: 2,
+              gap: 5,
             }}
             disabled={disabled}>
             <View
               style={{
-                padding: 10,
+                padding: 2,
                 borderWidth: 1,
-                borderColor: isSelected ? 'black' : 'blue',
-              }}
-            />
-            <Text>{option}</Text>
+                borderColor: isSelected ? colors.primary : colors.gray,
+                borderRadius: 10,
+              }}>
+              <View
+                style={{
+                  padding: 6,
+                  backgroundColor: isSelected ? 'blue' : '#ffffff',
+                  borderRadius: 10,
+                }}
+              />
+            </View>
+            <Text style={{textTransform: 'capitalize'}}>{option}</Text>
           </Pressable>
         );
       })}
